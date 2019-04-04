@@ -4,7 +4,7 @@ import { FormsModule } from '@angular/forms';
 import { HttpClientModule } from '@angular/common/http';
 
 import { AppComponent } from './app.component';
-import { HeroesComponent } from './heroes/heroes.component';
+import { HeroesComponent } from './heroes/components/heroes.component';
 import { HeroDetailComponent } from './hero-detail/hero-detail.component';
 import { MessagesComponent } from './messages/messages.component';
 import { AppRoutingModule } from './app-routing.module';
@@ -12,6 +12,13 @@ import { DashboardComponent } from './dashboard/dashboard.component';
 import { InMemoryDataService } from './in-memory-data.service';
 import { HttpClientInMemoryWebApiModule } from 'angular-in-memory-web-api';
 import { HeroSearchComponent } from './hero-search/hero-search.component';
+import { StoreModule, ActionReducerMap } from '@ngrx/store';
+import { heroReducer } from './heroes/store/heroes.reducer';
+import { EffectsModule } from '@ngrx/effects';
+import { HeroesEffects } from './heroes/store/heroes.effects';
+import { IAppState } from './heroes/store/app.state';
+
+const metaReducer: ActionReducerMap<IAppState> = { heroes: heroReducer };
 
 @NgModule({
   declarations: [
@@ -29,7 +36,9 @@ import { HeroSearchComponent } from './hero-search/hero-search.component';
     HttpClientModule,
     HttpClientInMemoryWebApiModule.forRoot(
       InMemoryDataService, { dataEncapsulation: false }
-    )
+    ),
+    StoreModule.forRoot(metaReducer),
+    // EffectsModule.forRoot([HeroesEffects])
   ],
   providers: [],
   bootstrap: [AppComponent]
