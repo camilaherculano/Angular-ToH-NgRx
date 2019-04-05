@@ -14,8 +14,6 @@ import { HttpClientInMemoryWebApiModule } from 'angular-in-memory-web-api';
 import { HeroSearchComponent } from './hero-search/hero-search.component';
 import { StoreModule, ActionReducerMap } from '@ngrx/store';
 import { heroReducer } from './heroes/store/heroes.reducer';
-import { EffectsModule } from '@ngrx/effects';
-import { HeroesEffects } from './heroes/store/heroes.effects';
 import { IAppState } from './heroes/store/app.state';
 
 const metaReducer: ActionReducerMap<IAppState> = { heroes: heroReducer };

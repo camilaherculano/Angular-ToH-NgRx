@@ -1,7 +1,6 @@
 import * as actions from './heroes.actions';
 import { Hero } from '../../hero';
-import { EntityState, createEntityAdapter } from '@ngrx/entity';
-import { createFeatureSelector, createSelector } from '@ngrx/store';
+import { createSelector } from '@ngrx/store';
 import { IAppState } from './app.state';
 
 export interface IHeroState {
@@ -31,7 +30,6 @@ export function heroReducer(
       const heroItemsId: number[] = state.heroes
         .map(hero => hero.id);
 
-      // const lastId = heroItemsId   [heroItemsId.length - 1];
       const lastId = heroItemsId.length > 0 ? Math.max(...heroItemsId) + 1 : 1;
 
       const data: Hero = { id: lastId || 1, name: action.payload.name };
@@ -69,16 +67,7 @@ export const selectHeroes = createSelector(
 
 export const selectHeroById = createSelector(
   selectHeroesState,
-  (state: IHeroState, { id }) => state.heroes.find(hero => hero.id === id)
+  (state: IHeroState, { id }) => {
+    return state.heroes.find(hero => hero.id === id);
+  }
 );
-
-// export const heroAdapter = createEntityAdapter<IHeroState>();
-// export interface IHeroState extends EntityState<IHeroState> { }
-
-// export const getHeroes = (state: IHeroState) => state.heroes;
-// export const getHeroesState = createFeatureSelector<IHeroState>('heroes');
-
-// export const {
-//   selectAll,
-//   selectIds
-// } = heroAdapter.getSelectors(getHeroState);

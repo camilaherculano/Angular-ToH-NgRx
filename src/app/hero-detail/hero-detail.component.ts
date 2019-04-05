@@ -3,6 +3,9 @@ import { Hero } from '../hero';
 import { ActivatedRoute } from '@angular/router';
 import { HeroService } from '../hero.service';
 import { Location } from '@angular/common';
+import { select, Store } from '@ngrx/store';
+import { selectHeroById } from '../heroes/store/heroes.reducer';
+import { IAppState } from '../heroes/store/app.state';
 
 @Component({
   selector: 'app-hero-detail',
@@ -15,7 +18,8 @@ export class HeroDetailComponent implements OnInit {
   constructor(
     private route: ActivatedRoute,
     private heroService: HeroService,
-    private location: Location
+    private location: Location,
+    private store: Store<IAppState>
   ) {}
 
   ngOnInit(): void {
@@ -24,8 +28,10 @@ export class HeroDetailComponent implements OnInit {
 
   getHero(): void {
     const id = +this.route.snapshot.paramMap.get('id');
-    this.heroService.getHero(id)
-      .subscribe(hero => this.hero = hero);
+
+    this.store.pipe(select(selectHeroById, {id} )).subscribe(hero => {
+      this.hero = hero;
+    });
   }
 
   goBack(): void {

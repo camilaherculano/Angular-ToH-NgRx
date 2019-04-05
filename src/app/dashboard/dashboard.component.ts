@@ -1,9 +1,9 @@
 import { Component, OnInit } from '@angular/core';
 import { Hero } from '../hero';
-import { HeroService } from '../hero.service';
-import { IHeroState } from '../heroes/store/heroes.reducer';
-import { Store } from '@ngrx/store';
-import { LoadHeroes } from '../heroes/store/heroes.actions';
+import { selectHeroes } from '../heroes/store/heroes.reducer';
+import { Store, select } from '@ngrx/store';
+import { HeroActionsType } from '../heroes/store/heroes.actions';
+import { IAppState } from '../heroes/store/app.state';
 
 @Component({
   selector: 'app-dashboard',
@@ -14,17 +14,18 @@ export class DashboardComponent implements OnInit {
   heroes: Hero[] = [];
 
   constructor(
-    private heroService: HeroService,
-    private store: Store<IHeroState>
+    private store: Store<IAppState>
     ) { }
 
   ngOnInit() {
     this.getHeroes();
-    this.store.dispatch(new LoadHeroes());
   }
 
   getHeroes(): void {
-    this.heroService.getHeroes()
-      .subscribe(heroes => this.heroes = heroes.slice(1, 5));
+    this.store.pipe(select(selectHeroes)).subscribe(heroes => {
+      this.heroes = heroes.slice(0, 4);
+    });
+
+    this.store.dispatch({ type: HeroActionsType.LoadHeroes });
   }
 }
