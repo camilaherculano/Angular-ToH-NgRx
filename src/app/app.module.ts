@@ -2,6 +2,7 @@ import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { HttpClientModule } from '@angular/common/http';
+import { StoreDevtoolsModule } from '@ngrx/store-devtools';
 
 import { AppComponent } from './app.component';
 import { HeroesComponent } from './heroes/components/heroes.component';
@@ -36,6 +37,7 @@ const metaReducer: ActionReducerMap<IAppState> = { heroes: heroReducer };
       InMemoryDataService, { dataEncapsulation: false }
     ),
     StoreModule.forRoot(metaReducer),
+    StoreDevtoolsModule.instrument()
     // EffectsModule.forRoot([HeroesEffects])
   ],
   providers: [],
