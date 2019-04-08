@@ -20,9 +20,30 @@ export class HeroesEffects {
   );
 
   @Effect({ dispatch: false })
-  serverFailure$ = this.actions$.pipe(
+  serverFailureLoad$ = this.actions$.pipe(
     ofType(Heroes.HeroActionsType.LoadHeroesError),
     map((action: Heroes.LoadHeroesError) => action.payload),
+    exhaustMap(errors => {
+      console.log('Server error: ', errors);
+      return of(null);
+    })
+  );
+
+  @Effect()
+  updateHeroes$ = this.actions$.pipe(
+    ofType(Heroes.HeroActionsType.UpdateHeroes),
+    mergeMap(() => {
+      return this.heroesService.getHeroes().pipe(
+        map(res => new Heroes.UpdateHeroesSuccess(res)),
+        catchError(error => of(new Heroes.UpdateHeroesError(error)))
+      );
+    })
+  );
+
+  @Effect({ dispatch: false })
+  serverFailureUpdate$ = this.actions$.pipe(
+    ofType(Heroes.HeroActionsType.UpdateHeroesError),
+    map((action: Heroes.UpdateHeroesError) => action.payload),
     exhaustMap(errors => {
       console.log('Server error: ', errors);
       return of(null);

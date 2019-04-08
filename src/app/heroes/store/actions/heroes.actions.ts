@@ -7,7 +7,10 @@ export enum HeroActionsType {
   AddHero = '[Hero] Add Hero',
   RemoveHero = '[Hero] Remove Hero',
   LoadHeroesSuccess = '[Heroes API] Heroes Loaded Success',
-  LoadHeroesError = '[Heroes API] Heroes Loaded Error'
+  LoadHeroesError = '[Heroes API] Heroes Loaded Error',
+  UpdateHeroes = '[Heroes API] Heroes Update',
+  UpdateHeroesSuccess = '[Heroes API] Heroes Update Success',
+  UpdateHeroesError = '[Heroes API] Heroes Update Error'
 }
 
 export class LoadHeroes implements Action {
@@ -38,9 +41,28 @@ export class LoadHeroesError implements Action {
   constructor(public payload: any) {}
 }
 
+export class UpdateHeroes implements Action {
+  readonly type = HeroActionsType.UpdateHeroes;
+}
+
+export class UpdateHeroesSuccess implements Action {
+  readonly type = HeroActionsType.UpdateHeroesSuccess;
+
+  constructor(public payload: any) {}
+}
+
+export class UpdateHeroesError implements Action {
+  readonly type = HeroActionsType.UpdateHeroesError;
+
+  constructor(public payload: any) {}
+}
+
 export type HeroActionsUnion =
   | LoadHeroes
   | AddHero
   | RemoveHero
   | LoadHeroesSuccess
-  | LoadHeroesError;
+  | LoadHeroesError
+  | UpdateHeroes
+  | UpdateHeroesSuccess
+  | UpdateHeroesError;

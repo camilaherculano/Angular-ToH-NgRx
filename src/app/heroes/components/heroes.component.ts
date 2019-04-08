@@ -5,7 +5,6 @@ import { Store, select } from '@ngrx/store';
 import { selectHeroes } from '../store/reducers/heroes.reducer';
 import { IAppState } from '../store/app.state';
 import { HeroActionsType } from '../store/actions/heroes.actions';
-import { Observable } from 'rxjs';
 
 @Component({
   selector: 'app-heroes',
@@ -24,7 +23,7 @@ export class HeroesComponent implements OnInit {
       this.heroes = heroes;
     });
 
-    this.store.dispatch({ type: HeroActionsType.LoadHeroes });
+    this.store.dispatch({ type: HeroActionsType.UpdateHeroes });
   }
 
   getHeroes(): void {
@@ -32,7 +31,7 @@ export class HeroesComponent implements OnInit {
       this.heroes = heroes;
     });
 
-    this.store.dispatch({ type: HeroActionsType.LoadHeroes });
+    this.store.dispatch({ type: HeroActionsType.UpdateHeroes });
   }
 
   add(name: string): void {

@@ -54,6 +54,12 @@ export function heroReducer(
 
     case actions.HeroActionsType.LoadHeroesSuccess: {
       return {
+        heroes:  [...state.heroes, ...action.payload]
+      };
+    }
+
+    case actions.HeroActionsType.UpdateHeroesSuccess: {
+      return {
         ...state
       };
     }

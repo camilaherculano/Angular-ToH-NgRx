@@ -26,6 +26,6 @@ export class DashboardComponent implements OnInit {
       this.heroes = heroes.slice(0, 4);
     });
 
-    this.store.dispatch({ type: HeroActionsType.LoadHeroes });
+    this.store.dispatch({ type: HeroActionsType.UpdateHeroes });
   }
 }
