@@ -14,8 +14,10 @@ import { InMemoryDataService } from './in-memory-data.service';
 import { HttpClientInMemoryWebApiModule } from 'angular-in-memory-web-api';
 import { HeroSearchComponent } from './hero-search/hero-search.component';
 import { StoreModule, ActionReducerMap } from '@ngrx/store';
-import { heroReducer } from './heroes/store/heroes.reducer';
+import { heroReducer } from './heroes/store/reducers/heroes.reducer';
 import { IAppState } from './heroes/store/app.state';
+import { EffectsModule } from '@ngrx/effects';
+import { HeroesEffects } from './heroes/store/effects/heroestest.effects';
 
 const metaReducer: ActionReducerMap<IAppState> = { heroes: heroReducer };
 
@@ -37,8 +39,8 @@ const metaReducer: ActionReducerMap<IAppState> = { heroes: heroReducer };
       InMemoryDataService, { dataEncapsulation: false }
     ),
     StoreModule.forRoot(metaReducer),
-    StoreDevtoolsModule.instrument()
-    // EffectsModule.forRoot([HeroesEffects])
+    StoreDevtoolsModule.instrument(),
+    EffectsModule.forRoot([HeroesEffects])
   ],
   providers: [],
   bootstrap: [AppComponent]

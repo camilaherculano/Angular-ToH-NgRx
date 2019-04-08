@@ -1,11 +1,13 @@
 import { Action } from '@ngrx/store';
 
-import { Hero } from '../../hero';
+import { Hero } from '../../../hero';
 
 export enum HeroActionsType {
   LoadHeroes = '[Hero] Load Heroes',
   AddHero = '[Hero] Add Hero',
-  RemoveHero = '[Hero] Remove Hero'
+  RemoveHero = '[Hero] Remove Hero',
+  LoadHeroesSuccess = '[Heroes API] Heroes Loaded Success',
+  LoadHeroesError = '[Heroes API] Heroes Loaded Error'
 }
 
 export class LoadHeroes implements Action {
@@ -24,7 +26,21 @@ export class RemoveHero implements Action {
   constructor(public payload: Hero) {}
 }
 
+export class LoadHeroesSuccess implements Action {
+  readonly type = HeroActionsType.LoadHeroesSuccess;
+
+  constructor(public payload: any) {}
+}
+
+export class LoadHeroesError implements Action {
+  readonly type = HeroActionsType.LoadHeroesError;
+
+  constructor(public payload: any) {}
+}
+
 export type HeroActionsUnion =
   | LoadHeroes
   | AddHero
-  | RemoveHero;
+  | RemoveHero
+  | LoadHeroesSuccess
+  | LoadHeroesError;

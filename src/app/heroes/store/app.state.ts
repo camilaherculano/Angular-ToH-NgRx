@@ -1,4 +1,4 @@
-import { IHeroState, initialHeroState } from './heroes.reducer';
+import { IHeroState, initialHeroState } from './reducers/heroes.reducer';
 
 export interface IAppState {
   heroes: IHeroState;

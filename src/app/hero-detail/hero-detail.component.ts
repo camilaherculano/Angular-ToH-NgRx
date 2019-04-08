@@ -4,7 +4,7 @@ import { ActivatedRoute } from '@angular/router';
 import { HeroService } from '../hero.service';
 import { Location } from '@angular/common';
 import { select, Store } from '@ngrx/store';
-import { selectHeroById } from '../heroes/store/heroes.reducer';
+import { selectHeroById } from '../heroes/store/reducers/heroes.reducer';
 import { IAppState } from '../heroes/store/app.state';
 
 @Component({

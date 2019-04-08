@@ -2,9 +2,10 @@
 import { Component, OnInit } from '@angular/core';
 import { Hero } from '../../hero';
 import { Store, select } from '@ngrx/store';
-import { selectHeroes } from '../store/heroes.reducer';
+import { selectHeroes } from '../store/reducers/heroes.reducer';
 import { IAppState } from '../store/app.state';
-import { HeroActionsType } from '../store/heroes.actions';
+import { HeroActionsType } from '../store/actions/heroes.actions';
+import { Observable } from 'rxjs';
 
 @Component({
   selector: 'app-heroes',

@@ -1,8 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { Hero } from '../hero';
-import { selectHeroes } from '../heroes/store/heroes.reducer';
+import { selectHeroes } from '../heroes/store/reducers/heroes.reducer';
 import { Store, select } from '@ngrx/store';
-import { HeroActionsType } from '../heroes/store/heroes.actions';
+import { HeroActionsType } from '../heroes/store/actions/heroes.actions';
 import { IAppState } from '../heroes/store/app.state';
 
 @Component({

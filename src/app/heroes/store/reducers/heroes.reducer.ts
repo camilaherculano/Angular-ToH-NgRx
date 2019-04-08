@@ -1,7 +1,7 @@
-import * as actions from './heroes.actions';
-import { Hero } from '../../hero';
+import * as actions from '../actions/heroes.actions';
+import { Hero } from '../../../hero';
 import { createSelector } from '@ngrx/store';
-import { IAppState } from './app.state';
+import { IAppState } from '../app.state';
 
 export interface IHeroState {
   heroes: Hero[];
@@ -49,6 +49,13 @@ export function heroReducer(
       return {
         ...state,
         heroes
+      };
+    }
+
+    case actions.HeroActionsType.LoadHeroesSuccess: {
+      return {
+        ...state,
+        heroes: [...state.heroes, ...action.payload]
       };
     }
 
