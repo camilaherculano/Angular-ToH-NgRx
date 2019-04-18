@@ -13,6 +13,10 @@ export enum HeroActionsType {
   UpdateHeroesError = '[Heroes API] Heroes Update Error'
 }
 
+export abstract class HeroesError<T = any> {
+  constructor(public payload: T) {}
+}
+
 export class LoadHeroes implements Action {
   readonly type = HeroActionsType.LoadHeroes;
 }
@@ -35,10 +39,8 @@ export class LoadHeroesSuccess implements Action {
   constructor(public payload: any) {}
 }
 
-export class LoadHeroesError implements Action {
+export class LoadHeroesError extends HeroesError implements Action {
   readonly type = HeroActionsType.LoadHeroesError;
-
-  constructor(public payload: any) {}
 }
 
 export class UpdateHeroes implements Action {
