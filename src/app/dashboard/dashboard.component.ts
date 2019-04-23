@@ -2,7 +2,6 @@ import { Component, OnInit } from '@angular/core';
 import { Hero } from '../hero';
 import { selectHeroes } from '../heroes/store/reducers/heroes.reducer';
 import { Store, select } from '@ngrx/store';
-import { HeroActionsType } from '../heroes/store/actions/heroes.actions';
 import { IAppState } from '../heroes/store/app.state';
 
 @Component({
@@ -25,7 +24,5 @@ export class DashboardComponent implements OnInit {
     this.store.pipe(select(selectHeroes)).subscribe(heroes => {
       this.heroes = heroes.slice(0, 4);
     });
-
-    this.store.dispatch({ type: HeroActionsType.UpdateHeroes });
   }
 }

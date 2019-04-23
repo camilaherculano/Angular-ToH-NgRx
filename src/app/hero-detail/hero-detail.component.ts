@@ -1,11 +1,11 @@
 import { Component, OnInit, Input } from '@angular/core';
 import { Hero } from '../hero';
 import { ActivatedRoute } from '@angular/router';
-import { HeroService } from '../hero.service';
 import { Location } from '@angular/common';
 import { select, Store } from '@ngrx/store';
 import { selectHeroById } from '../heroes/store/reducers/heroes.reducer';
 import { IAppState } from '../heroes/store/app.state';
+import { HeroActionsType } from '../heroes/store/actions/heroes.actions';
 
 @Component({
   selector: 'app-hero-detail',
@@ -17,7 +17,6 @@ export class HeroDetailComponent implements OnInit {
 
   constructor(
     private route: ActivatedRoute,
-    private heroService: HeroService,
     private location: Location,
     private store: Store<IAppState>
   ) {}
@@ -39,7 +38,7 @@ export class HeroDetailComponent implements OnInit {
   }
 
  save(): void {
-    this.heroService.updateHero(this.hero)
-      .subscribe(() => this.goBack());
+    this.store.dispatch({ type: HeroActionsType.UpdateHero, payload: this.hero });
+    this.goBack();
   }
 }

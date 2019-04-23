@@ -8,9 +8,12 @@ export enum HeroActionsType {
   RemoveHero = '[Hero] Remove Hero',
   LoadHeroesSuccess = '[Heroes API] Heroes Loaded Success',
   LoadHeroesError = '[Heroes API] Heroes Loaded Error',
-  UpdateHeroes = '[Heroes API] Heroes Update',
-  UpdateHeroesSuccess = '[Heroes API] Heroes Update Success',
-  UpdateHeroesError = '[Heroes API] Heroes Update Error'
+  UpdateHero = '[Heroes API] Hero Update',
+  UpdateHeroSuccess = '[Heroes API] Hero Update Success',
+  UpdateHeroError = '[Heroes API] Hero Update Error',
+  SearchHero = '[Heroes API] Hero Search',
+  SearchHeroSuccess = '[Heroes API] Hero Search Success',
+  SearchHeroError = '[Heroes API] Hero Search Error',
 }
 
 export abstract class HeroesError<T = any> {
@@ -43,18 +46,38 @@ export class LoadHeroesError extends HeroesError implements Action {
   readonly type = HeroActionsType.LoadHeroesError;
 }
 
-export class UpdateHeroes implements Action {
-  readonly type = HeroActionsType.UpdateHeroes;
+export class UpdateHero implements Action {
+  readonly type = HeroActionsType.UpdateHero;
+
+  constructor(public payload: Hero) {}
 }
 
-export class UpdateHeroesSuccess implements Action {
-  readonly type = HeroActionsType.UpdateHeroesSuccess;
+export class UpdateHeroSuccess implements Action {
+  readonly type = HeroActionsType.UpdateHeroSuccess;
 
   constructor(public payload: any) {}
 }
 
-export class UpdateHeroesError implements Action {
-  readonly type = HeroActionsType.UpdateHeroesError;
+export class UpdateHeroError implements Action {
+  readonly type = HeroActionsType.UpdateHeroError;
+
+  constructor(public payload: any) {}
+}
+
+export class SearchHero implements Action {
+  readonly type = HeroActionsType.SearchHero;
+
+  constructor(public payload: string) {}
+}
+
+export class SearchHeroSuccess implements Action {
+  readonly type = HeroActionsType.SearchHeroSuccess;
+
+  constructor(public payload: any) {}
+}
+
+export class SearchHeroError implements Action {
+  readonly type = HeroActionsType.SearchHeroError;
 
   constructor(public payload: any) {}
 }
@@ -65,6 +88,9 @@ export type HeroActionsUnion =
   | RemoveHero
   | LoadHeroesSuccess
   | LoadHeroesError
-  | UpdateHeroes
-  | UpdateHeroesSuccess
-  | UpdateHeroesError;
+  | UpdateHero
+  | UpdateHeroSuccess
+  | UpdateHeroError
+  | SearchHero
+  | SearchHeroSuccess
+  | SearchHeroError;

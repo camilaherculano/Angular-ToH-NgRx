@@ -58,10 +58,28 @@ export function heroReducer(
       };
     }
 
-    case actions.HeroActionsType.UpdateHeroesSuccess: {
-      // return {
-        // ...state
-      // };
+    case actions.HeroActionsType.UpdateHeroSuccess: {
+      state.heroes.filter(item => {
+        if (item.id === action.payload.id) {
+          return item;
+        }
+      });
+
+      return {
+        ...state
+      };
+    }
+
+    case actions.HeroActionsType.SearchHeroSuccess: {
+      state.heroes.filter(item => {
+        if (item.name === action.payload.name) {
+          return item.name;
+        }
+      });
+
+      return {
+        ...state
+      };
     }
 
     default: {

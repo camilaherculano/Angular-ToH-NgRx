@@ -22,16 +22,12 @@ export class HeroesComponent implements OnInit {
     this.store.pipe(select(selectHeroes)).subscribe(heroes => {
       this.heroes = heroes;
     });
-
-    this.store.dispatch({ type: HeroActionsType.UpdateHeroes });
   }
 
   getHeroes(): void {
     this.store.pipe(select(selectHeroes)).subscribe(heroes => {
       this.heroes = heroes;
     });
-
-    this.store.dispatch({ type: HeroActionsType.UpdateHeroes });
   }
 
   add(name: string): void {
